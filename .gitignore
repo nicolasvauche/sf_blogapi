@@ -1,3 +1,6 @@
+###> local/sf_blogapi ###
+.idea/
+###< local/sf_blogapi ###
 
 ###> symfony/framework-bundle ###
 /.env.local
