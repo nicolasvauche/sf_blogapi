@@ -22,7 +22,7 @@ class LatestPostsController extends AbstractController
         $data = array_map(function($post) {
             return [
                 'id' => $post->getId(),
-                'title' => $post->getTitle(),
+                'title' => $post->getCategory()->getName() . ' - ' . $post->getTitle(),
                 'slug' => $post->getSlug(),
                 'updatedAt' => $post->getUpdatedAt()->format('c'),
                 '_links' => [

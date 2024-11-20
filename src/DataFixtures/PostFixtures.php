@@ -21,7 +21,7 @@ class PostFixtures extends Fixture implements OrderedFixtureInterface
             for($i = 1; $i <= 3; $i++) {
                 $post = new Post();
                 $post->setCategory($this->getReference($categoryReference))
-                    ->setTitle("$categoryName - Article $i")
+                    ->setTitle("Article $categoryName n°$i")
                     ->setContent("Contenu de l'article $i dans la catégorie $categoryName.")
                     ->setAuthor($this->getReference($i % 2 === 0 ? 'user-author-2' : 'user-author-1'))
                     ->setPublished(true);

@@ -23,13 +23,13 @@ class AuthController extends AbstractController
         $data = json_decode($request->getContent(), true);
 
         if(!$data || !isset($data['email'], $data['password'])) {
-            return $this->json(['error' => 'Invalid credentials'], Response::HTTP_BAD_REQUEST);
+            return $this->json(['error' => 'Identifiants incorrects'], Response::HTTP_BAD_REQUEST);
         }
 
         $user = $userRepository->findOneBy(['email' => $data['email']]);
 
         if(!$user || !$passwordHasher->isPasswordValid($user, $data['password'])) {
-            return $this->json(['error' => 'Invalid credentials'], Response::HTTP_UNAUTHORIZED);
+            return $this->json(['error' => 'Identifiants incorrects'], Response::HTTP_UNAUTHORIZED);
         }
 
         $token = $jwtManager->create($user);

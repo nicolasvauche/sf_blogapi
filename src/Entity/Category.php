@@ -30,6 +30,7 @@ class Category
      * @var Collection<int, Post>
      */
     #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'category', orphanRemoval: true)]
+    #[ORM\OrderBy(['createdAt' => 'DESC'])]
     private Collection $posts;
 
     public function __construct()
@@ -76,7 +77,7 @@ class Category
 
     public function addPost(Post $post): static
     {
-        if (!$this->posts->contains($post)) {
+        if(!$this->posts->contains($post)) {
             $this->posts->add($post);
             $post->setCategory($this);
         }
@@ -86,9 +87,9 @@ class Category
 
     public function removePost(Post $post): static
     {
-        if ($this->posts->removeElement($post)) {
+        if($this->posts->removeElement($post)) {
             // set the owning side to null (unless already changed)
-            if ($post->getCategory() === $this) {
+            if($post->getCategory() === $this) {
                 $post->setCategory(null);
             }
         }
