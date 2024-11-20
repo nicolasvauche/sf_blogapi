@@ -1,0 +1,122 @@
+@startuml
+!pragma layout smetana
+left to right direction
+
+actor Joueur
+actor "Administrateur" as Admin
+
+rectangle "Gestion des Comptes Joueurs" {
+    usecase "Créer son compte joueur" as CreerCompte
+    usecase "Modifier son compte joueur" as ModifierCompte
+    usecase "Supprimer son compte joueur" as SupprimerCompte
+
+    usecase "Ajouter un compte joueur" as AjouterCompteAdmin
+    usecase "Modifier un compte joueur" as ModifierCompteAdmin
+    usecase "Supprimer un compte joueur" as SupprimerCompteAdmin
+    usecase "Activer/Désactiver un compte joueur" as ActiverDesactiverCompte
+}
+
+rectangle "Gestion des Personnages" {
+    usecase "Créer un personnage" as CreerPersonnage
+    usecase "Modifier un personnage" as ModifierPersonnage
+    usecase "Supprimer un personnage" as SupprimerPersonnage
+    usecase "Voir les statistiques d'un personnage" as VoirStats
+    usecase "Voir l'équipement d'un personnage" as VoirEquipement
+}
+
+rectangle "Gestion des Parties" {
+    usecase "Créer une partie" as CreerPartie
+    usecase "Modifier une partie" as ModifierPartie
+    usecase "Supprimer une partie" as SupprimerPartie
+    usecase "Publier une partie" as PublierPartie
+}
+
+rectangle "Gestion des Événements" {
+    usecase "Créer un événement entre joueurs" as CreerEvenement
+    usecase "Modifier un événement entre joueurs" as ModifierEvenement
+    usecase "Supprimer un événement entre joueurs" as SupprimerEvenement
+    usecase "Publier un événement entre joueurs" as PublierEvenement
+    usecase "Inviter un joueur à un événement" as InviterJoueur
+    usecase "Accepter/Refuser une invitation à un événement" as AccepterRefuserInvitation
+    usecase "Lister les événements" as ListerEvenements
+    usecase "Filtrer les événements" as FiltrerEvenements
+}
+
+rectangle "Gestion des Cartes" {
+    usecase "Créer une carte" as CreerCarte
+    usecase "Modifier une carte" as ModifierCarte
+    usecase "Supprimer une carte" as SupprimerCarte
+    usecase "Ajouter une carte à une partie" as AjouterCartePartie
+    usecase "Enlever une carte à une partie" as EnleverCartePartie
+}
+
+rectangle "Gestion des Ennemis" {
+    usecase "Créer un ennemi" as CreerEnnemi
+    usecase "Modifier un ennemi" as ModifierEnnemi
+    usecase "Supprimer un ennemi" as SupprimerEnnemi
+    usecase "Ajouter un ennemi à une partie" as AjouterEnnemiPartie
+    usecase "Enlever un ennemi à une partie" as EnleverEnnemiPartie
+}
+
+rectangle "Gestion des Trésors" {
+    usecase "Créer un trésor" as CreerTresor
+    usecase "Modifier un trésor" as ModifierTresor
+    usecase "Supprimer un trésor" as SupprimerTresor
+    usecase "Ajouter un trésor à une partie" as AjouterTresorPartie
+    usecase "Enlever un trésor à une partie" as EnleverTresorPartie
+}
+
+rectangle "Interactions et Gameplay" {
+    usecase "Communiquer avec les autres joueurs" as Communiquer
+    usecase "Jouer à une partie" as JouerPartie
+    usecase "Effectuer un combat" as EffectuerCombat
+    usecase "Ramasser un trésor" as RamasserTresor
+    usecase "Notification Email" as NotificationEmail
+}
+
+Joueur --> CreerCompte
+Joueur --> ModifierCompte
+Joueur --> SupprimerCompte
+Joueur --> CreerPersonnage
+Joueur --> ModifierPersonnage
+Joueur --> SupprimerPersonnage
+Joueur --> VoirStats
+Joueur --> VoirEquipement
+Joueur --> Communiquer
+Joueur --> JouerPartie
+Joueur --> EffectuerCombat
+Joueur --> RamasserTresor
+Joueur --> CreerEvenement
+Joueur --> ModifierEvenement
+Joueur --> SupprimerEvenement
+Joueur --> PublierEvenement
+Joueur --> InviterJoueur
+Joueur --> AccepterRefuserInvitation
+Joueur --> ListerEvenements
+Joueur --> FiltrerEvenements
+Joueur --> NotificationEmail
+
+Admin --> AjouterCompteAdmin
+Admin --> ModifierCompteAdmin
+Admin --> SupprimerCompteAdmin
+Admin --> ActiverDesactiverCompte
+Admin --> CreerPartie
+Admin --> ModifierPartie
+Admin --> SupprimerPartie
+Admin --> PublierPartie
+Admin --> CreerCarte
+Admin --> ModifierCarte
+Admin --> SupprimerCarte
+Admin --> AjouterCartePartie
+Admin --> EnleverCartePartie
+Admin --> CreerEnnemi
+Admin --> ModifierEnnemi
+Admin --> SupprimerEnnemi
+Admin --> AjouterEnnemiPartie
+Admin --> EnleverEnnemiPartie
+Admin --> CreerTresor
+Admin --> ModifierTresor
+Admin --> SupprimerTresor
+Admin --> AjouterTresorPartie
+Admin --> EnleverTresorPartie
+@enduml

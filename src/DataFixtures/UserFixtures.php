@@ -20,7 +20,7 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $user = new User();
-        $user->setEmail('admin@bloagpi.com')
+        $user->setEmail('admin@blogapi.com')
             ->setPassword($this->passwordHasher->hashPassword($user, 'admin'))
             ->setRoles(['ROLE_ADMIN'])
             ->setName('Administrateur')
@@ -29,7 +29,7 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
         $this->addReference('user-admin', $user);
 
         $user = new User();
-        $user->setEmail('author@bloagpi.com')
+        $user->setEmail('author@blogapi.com')
             ->setPassword($this->passwordHasher->hashPassword($user, 'author'))
             ->setName('Auteur 1')
             ->setActive(true);
@@ -37,7 +37,7 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
         $this->addReference('user-author-1', $user);
 
         $user = new User();
-        $user->setEmail('author2@bloagpi.com')
+        $user->setEmail('author2@blogapi.com')
             ->setPassword($this->passwordHasher->hashPassword($user, 'author'))
             ->setName('Auteur 2')
             ->setActive(true);

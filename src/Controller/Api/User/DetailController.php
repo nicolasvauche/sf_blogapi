@@ -11,11 +11,26 @@ use Symfony\Component\Serializer\SerializerInterface;
 #[Route('/api/users', name: 'app_api_user_')]
 class DetailController extends AbstractController
 {
-    #[Route('/{slug}', name: 'detail', methods: ['GET'])]
+    #[Route('/details/{slug}', name: 'detail', methods: ['GET'])]
     public function detail(User $user, SerializerInterface $serializer): Response
     {
         $data = $serializer->normalize($user, null, ['groups' => 'user:detail']);
 
         return $this->json($data, 200);
+    }
+
+    #[Route('/me', name: 'me', methods: ['GET'])]
+    public function me(): Response
+    {
+        $user = $this->getUser();
+
+        if(!$user) {
+            return $this->json(['message' => 'Non authentifié'], Response::HTTP_UNAUTHORIZED);
+        }
+
+        return $this->json([
+            'id' => $user->getId(),
+            'email' => $user->getEmail(),
+        ]);
     }
 }
