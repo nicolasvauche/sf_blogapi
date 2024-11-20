@@ -18,6 +18,7 @@ class DetailController extends AbstractController
             'title' => $post->getTitle(),
             'content' => $post->getContent(),
             'updatedAt' => $post->getUpdatedAt()->format('c'),
+            'canEdit' => ($this->getUser() === $post->getAuthor()) || $this->isGranted('ROLE_ADMIN'),
             '_links' => [
                 'self' => '/api/posts/detail/' . $post->getSlug(),
                 'author' => '/api/users/' . $post->getAuthor()->getSlug(),

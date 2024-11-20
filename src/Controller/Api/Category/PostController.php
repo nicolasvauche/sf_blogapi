@@ -24,6 +24,7 @@ class PostController extends AbstractController
                         'id' => $post->getId(),
                         'title' => $post->getTitle(),
                         'slug' => $post->getSlug(),
+                        'canEdit' => ($this->getUser() === $post->getAuthor()) || $this->isGranted('ROLE_ADMIN'),
                         '_links' => [
                             'self' => '/api/posts/detail/' . $post->getSlug(),
                         ],

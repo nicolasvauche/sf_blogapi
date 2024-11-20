@@ -25,6 +25,7 @@ class LatestPostsController extends AbstractController
                 'title' => $post->getCategory()->getName() . ' - ' . $post->getTitle(),
                 'slug' => $post->getSlug(),
                 'updatedAt' => $post->getUpdatedAt()->format('c'),
+                'canEdit' => ($this->getUser() === $post->getAuthor()) || $this->isGranted('ROLE_ADMIN'),
                 '_links' => [
                     'self' => '/api/posts/detail/' . $post->getSlug(),
                 ],
