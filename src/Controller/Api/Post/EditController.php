@@ -12,11 +12,12 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/api/posts', name: 'app_api_post_')]
-class AddController extends AbstractController
+class EditController extends AbstractController
 {
-    #[Route('/add', name: 'add', methods: ['POST'])]
+    #[Route('/edit/{slug}', name: 'edit', methods: ['PUT'])]
     #[IsGranted('ROLE_USER')]
-    public function add(
+    public function edit(
+        Post                   $post,
         Request                $request,
         EntityManagerInterface $entityManager,
         CategoryRepository     $categoryRepository
@@ -34,16 +35,16 @@ class AddController extends AbstractController
             return $this->json(['error' => 'Category not found'], Response::HTTP_BAD_REQUEST);
         }
 
-        $post = new Post();
+        if($post->getAuthor() !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {
+            return $this->json(['error' => 'Access denied'], Response::HTTP_FORBIDDEN);
+        }
+
         $post->setTitle($data['title'])
             ->setContent($data['content'])
-            ->setPublished(true)
-            ->setAuthor($this->getUser())
             ->setCategory($category);
 
-        $entityManager->persist($post);
         $entityManager->flush();
 
-        return $this->json(['message' => 'Post created successfully'], Response::HTTP_CREATED);
+        return $this->json(['message' => 'Post updated successfully'], Response::HTTP_OK);
     }
 }
